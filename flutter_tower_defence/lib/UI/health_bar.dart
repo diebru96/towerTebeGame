@@ -26,8 +26,8 @@ singleton.healtStream.stream.listen((event) {
   Widget build(BuildContext context) {
    return   Positioned(
         top: 65,
-        left: 45,
-        right: 80,
+        left: 30,
+        right: 90,
         child: Stack(
           alignment: Alignment.centerLeft,
           children: [

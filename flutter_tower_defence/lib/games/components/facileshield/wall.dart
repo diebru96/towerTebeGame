@@ -5,7 +5,6 @@ import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tower_defence/games/attack_house.dart';
-import 'package:flutter_tower_defence/games/components/enemies.dart';
 import 'package:flutter_tower_defence/singleton.dart';
 
 class WallComponent extends SpriteComponent with HasGameRef<AttackHouse>{

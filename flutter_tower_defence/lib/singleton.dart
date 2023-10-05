@@ -2,9 +2,8 @@ import 'dart:async';
 
 import 'package:flame/game.dart';
 
-enum DefenceSpawn { facileShield, tebeWave, tebeCannon, moneyProducer, heal }
+enum DefenceSpawn { facileShield, tebeWave, tebeCannon, moneyProducer, heal, powerUpProducer }
 
-enum EnemySpawn { ladro, rapinatore, tancre }
 
 class Singleton {
   static Singleton? _instance;
@@ -23,7 +22,6 @@ class Singleton {
 
   StreamController<double> healtStream = StreamController.broadcast();
   StreamController<DefenceSpawn> defenceSpawnStream = StreamController.broadcast();
-  StreamController<EnemySpawn> enemySpawnStream = StreamController.broadcast();
   StreamController<int> coinStream = StreamController.broadcast();
   StreamController<double> wallHealthStream = StreamController.broadcast();
   StreamController<PositionalInfo> spawnPosition = StreamController.broadcast();

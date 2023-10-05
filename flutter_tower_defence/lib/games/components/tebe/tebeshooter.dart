@@ -3,7 +3,8 @@ import 'dart:async' as aync_pack;
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter_tower_defence/games/attack_house.dart';
-import 'package:flutter_tower_defence/games/tebe/bullet.dart';
+import 'package:flutter_tower_defence/games/components/enemyComponents/thiefs.dart';
+import 'package:flutter_tower_defence/games/components/tebe/bullet.dart';
 import 'package:flutter_tower_defence/main.dart';
 import 'package:flutter_tower_defence/singleton.dart';
 
@@ -23,7 +24,7 @@ PositionalInfo placement;
         add(CircleHitbox());
 
 
-        t=aync_pack.Timer.periodic(const Duration(milliseconds: 400), (timer) {  
+        t=aync_pack.Timer.periodic(const Duration(milliseconds: 1500), (timer) {  
 
      BulletComponent bullet= BulletComponent(startPosition: position);
       parent!.add(bullet);
@@ -35,9 +36,11 @@ PositionalInfo placement;
   @override
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     super.onCollision(intersectionPoints, other);
+      if(other is ThiefComponent){
 
       removeFromParent();
-      other.removeFromParent();     
+      other.removeFromParent();    
+      } 
     }
 
 

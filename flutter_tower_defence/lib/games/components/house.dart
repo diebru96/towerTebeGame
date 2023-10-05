@@ -6,7 +6,9 @@ import 'package:flame/effects.dart';
 import 'package:flame_noise/flame_noise.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tower_defence/games/attack_house.dart';
-import 'package:flutter_tower_defence/games/components/enemies.dart';
+import 'package:flutter_tower_defence/games/components/enemyComponents/ghost.dart';
+import 'package:flutter_tower_defence/games/components/enemyComponents/killer.dart';
+import 'package:flutter_tower_defence/games/components/enemyComponents/thiefs.dart';
 import 'package:flutter_tower_defence/singleton.dart';
 
 class HouseComponent extends SpriteComponent with HasGameRef<AttackHouse>, CollisionCallbacks{
@@ -32,7 +34,7 @@ class HouseComponent extends SpriteComponent with HasGameRef<AttackHouse>, Colli
     super.onCollision(intersectionPoints, other);
     Singleton s = Singleton.instance;
     print("colliso");
-    if(other is EnemyComponent)
+    if(other is ThiefComponent || other is KillerComponent || other is GhostComponent)
     {
       gameRef.camera.viewfinder.add(
           MoveEffect.by(
@@ -69,7 +71,14 @@ class HouseComponent extends SpriteComponent with HasGameRef<AttackHouse>, Colli
       ),
     )));
           
+          if(other is KillerComponent)
+          {
+            s.healtWidth =  s.healtWidth- 100;
+          }
+          else
+          {
            s.healtWidth=  s.healtWidth- 50;
+          }
         }
 
   if(s.healtWidth-1<=0)

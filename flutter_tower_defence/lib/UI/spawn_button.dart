@@ -1,9 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_tower_defence/singleton.dart';
 
 import '../main.dart';
 
+// ignore: must_be_immutable
 class DefenceSpawnButton extends StatefulWidget {
   Color color;
   Icon icon;
@@ -35,12 +37,12 @@ class _DefenceSpawnButtonState extends State<DefenceSpawnButton> {
     return InkWell(
       
       child: AnimatedOpacity(
-                  duration: Duration(milliseconds: 400),
+                  duration: const Duration(milliseconds: 400),
 
         opacity: opacity,
         child: AnimatedContainer(
-          duration: Duration(milliseconds: 400),
-          margin: EdgeInsets.all(8),
+          duration: const Duration(milliseconds: 400),
+          margin: const EdgeInsets.all(8),
           width: 65,
           height: 65,
           decoration: BoxDecoration(
@@ -53,14 +55,14 @@ class _DefenceSpawnButtonState extends State<DefenceSpawnButton> {
             children: [
               Center(child: widget.icon),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Icon(
+                const Icon(
                   Icons.money,
                   color: Colors.yellow,
                   size: 12,
                 ),
                 Text(
                   widget.cost.toString(),
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                 )
               ])
             ],
@@ -69,11 +71,26 @@ class _DefenceSpawnButtonState extends State<DefenceSpawnButton> {
       ),
       onTap: () {
        if(singleton.coinAmount>=widget.cost){
-        if(widget.defencetype==DefenceSpawn.heal && singleton.healtWidth>=200)
-        {
-          
-          return;
-        }
+        //SALUTE PIENA
+           if(widget.defencetype==DefenceSpawn.heal && singleton.healtWidth>=200 )
+           {
+             return;
+           }
+        //non abbastanza spazi per muro
+           if(widget.defencetype==DefenceSpawn.facileShield && singleton.gridSpace.where((element) => listEquals(element, [true, true, true, true])).isEmpty )
+                {
+                 setState(() {
+                     color = Colors.redAccent;
+                     opacity=0.0;
+                   });
+                 Future.delayed(const Duration(milliseconds: 300)).then((_) {
+                   setState(() {
+                     color = widget.color;
+                     opacity=1.0;
+                    });
+                 });
+             return;
+           }   
         setState(() {
           color = Colors.white;
         });
@@ -100,7 +117,7 @@ class _DefenceSpawnButtonState extends State<DefenceSpawnButton> {
 
 
 //back to color
-       Future.delayed(Duration(milliseconds: 300)).then((_) {
+       Future.delayed(const Duration(milliseconds: 300)).then((_) {
           setState(() {
             color = widget.color;
             opacity=1.0;
